@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1918399889325235238}
   - component: {fileID: -2083236920432355096}
   - component: {fileID: 7892890302721301943}
+  - component: {fileID: 4958490598320003470}
+  - component: {fileID: 3484837396204613981}
   m_Layer: 0
   m_Name: Player
   m_TagString: player
@@ -78,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 999
-  m_Sprite: {fileID: 21300000, guid: 40b0a46f859e4114589a6a056e31a6aa, type: 3}
+  m_Sprite: {fileID: 2160208557075933595, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.5, y: 4.5}
+  m_Size: {x: 2.52, y: 2.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -106,6 +108,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -120,6 +128,25 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -127,8 +154,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.5, y: 4.5}
-    newSize: {x: 4.5, y: 4.5}
+    oldSize: {x: 2.97, y: 3}
+    newSize: {x: 2.52, y: 2.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -186,9 +213,85 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 5ce89b864431e9b49a48d18c5f1b5519, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.25
+--- !u!114 &4958490598320003470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918399889325235232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Tair Sprites
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Ready
+      m_Hash: 0
+      m_Sprite: {fileID: 1876549975169831848, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Run
+      m_Hash: 0
+      m_Sprite: {fileID: -251443183578716359, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Stretch
+      m_Hash: 0
+      m_Sprite: {fileID: 2160208557075933595, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Tired
+      m_Hash: 0
+      m_Sprite: {fileID: 1126947349342267053, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Won
+      m_Hash: 0
+      m_Sprite: {fileID: 1465428776928242027, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Bump
+      m_Hash: 0
+      m_Sprite: {fileID: -9021377524245124746, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Fell Over
+      m_Hash: 0
+      m_Sprite: {fileID: 5587310934678947750, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+    - m_Name: Lost
+      m_Hash: 0
+      m_Sprite: {fileID: 6720652700458107030, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
+  m_SpriteLibraryAsset: {fileID: 0}
+--- !u!114 &3484837396204613981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918399889325235232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: 0
+  m_labelHash: 0
+  m_SpriteKey: 0
+  m_SpriteHash: 637001585
