@@ -33,18 +33,19 @@ public class RaceManager : MonoBehaviour
         }
 
     }
+    void readyAllPlayers(){
+        int count = 0;
+        foreach (GameObject player in players) {
+            player.GetComponent<RacerBehavior>().SetReady();
+            count++;
+        }
+        print("Readied " + count + " players");
+    }
     public void FinishRace(GameObject winnerPlayer){
         if(raceIsRunning){
             raceIsRunning = false;
-            StartCoroutine(raceFinisher(winnerPlayer));
-
-            
+            StartCoroutine(raceFinisher(winnerPlayer));            
         }
-
-        
-    }
-    public void AddPlayer(GameObject player){
-        players.Add(player);
     }
     void StartAllPlayers() {
         foreach (GameObject player in players) {
@@ -61,7 +62,9 @@ public class RaceManager : MonoBehaviour
             }  
         }
     }
+
     IEnumerator raceStarter() {
+        readyAllPlayers();
         AudioSource.PlayClipAtPoint(startingNoise, Camera.main.transform.position, startingNoiseVolume);
         yield return new WaitForSeconds(startOffset);
         StartAllPlayers();
