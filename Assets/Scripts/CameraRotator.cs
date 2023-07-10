@@ -8,9 +8,11 @@ public class CameraRotator : MonoBehaviour
 {
     public List<CinemachineVirtualCamera> cameras;
     int activeCameraIndex;
+    public bool initted = false;
     // Start is called before the first frame update
     void Start()
     {
+        initted = true;
 
         activeCameraIndex = 0;
         // Add cameras in this order: Whole Track Camera, Group Shot Camera, Player 1 Camera, Player 2 Camera, Player 3 Camera, Player 4 Camera
@@ -35,6 +37,9 @@ public class CameraRotator : MonoBehaviour
                 camera.Priority = 0;
             }
         }
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("racer")){
+            cameras.Add(player.GetComponent<RacerCosmetic>().Init());
+        }
     }
     public void nextCamera(){
         cameras[activeCameraIndex].Priority = 0;
@@ -55,5 +60,15 @@ public class CameraRotator : MonoBehaviour
     public void SetActiveCamera(CinemachineVirtualCamera camera){
         cameras[activeCameraIndex].Priority = 0;
         camera.Priority = 1;
+        if(cameras.Contains(camera)){
+            activeCameraIndex = cameras.IndexOf(camera);
+        }
+        else{
+            cameras.Add(camera);
+            activeCameraIndex = cameras.Count - 1;
+        }
+    }
+    public void AddCamera(CinemachineVirtualCamera camera){
+        cameras.Add(camera);
     }
 }

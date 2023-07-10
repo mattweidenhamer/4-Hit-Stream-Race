@@ -72,7 +72,7 @@ public class RaceManager : MonoBehaviour
     }
     IEnumerator raceFinisher(GameObject winnerPlayer) {
             print(winnerPlayer.GetComponent<RacerCosmetic>().racerName + " won the race!");
-            cameraRotator.SetActiveCamera(winnerPlayer.GetComponent<RacerCosmetic>().myCamera);
+            cameraRotator.SetActiveCamera(winnerPlayer.GetComponent<RacerCosmetic>().GetCamera());
             AudioSource.PlayClipAtPoint(goalNoise, Camera.main.transform.position, goalNoiseVolume);
             timer.StopTimer();
             yield return new WaitForSeconds(winningLapTime);

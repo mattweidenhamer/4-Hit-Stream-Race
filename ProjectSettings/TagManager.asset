@@ -12,6 +12,7 @@ TagManager:
   - Finish Audio
   - Camera
   - Camera Manager
+  - UIRacerSelect
   layers:
   - Default
   - TransparentFX
