@@ -72,3 +72,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 .vscode/*
+
+# NuGet
+/Assets/NuGet.Config
+/Assets/NuGet.config.meta
+/Assets/Packages
