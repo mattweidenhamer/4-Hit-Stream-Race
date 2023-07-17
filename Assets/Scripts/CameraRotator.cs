@@ -9,9 +9,11 @@ public class CameraRotator : MonoBehaviour
     public List<CinemachineVirtualCamera> cameras;
     int activeCameraIndex;
     public bool initted = false;
+    CinemachineTargetGroup playerCamGroup;
     // Start is called before the first frame update
     void Start()
     {
+        playerCamGroup = GameObject.Find("Player Cam Group").GetComponent<CinemachineTargetGroup>();
         initted = true;
 
         activeCameraIndex = 0;
@@ -39,6 +41,7 @@ public class CameraRotator : MonoBehaviour
         }
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("racer")){
             cameras.Add(player.GetComponent<RacerCosmetic>().Init());
+            playerCamGroup.AddMember(player.transform, 1, 0);
         }
     }
     public void nextCamera(){
@@ -54,7 +57,7 @@ public class CameraRotator : MonoBehaviour
             return("Group Shot Camera");
         }
         else{
-            return("" + cameras[activeCameraIndex].m_Follow.GetComponent<RacerCosmetic>().racerName + "'s Camera");
+            return("" + cameras[activeCameraIndex].name);
         }
     }
     public void SetActiveCamera(CinemachineVirtualCamera camera){
@@ -70,5 +73,8 @@ public class CameraRotator : MonoBehaviour
     }
     public void AddCamera(CinemachineVirtualCamera camera){
         cameras.Add(camera);
+    }
+    public void AddTransformToPlayerCamGroup(Transform transform){
+        playerCamGroup.AddMember(transform, 1, 0);
     }
 }

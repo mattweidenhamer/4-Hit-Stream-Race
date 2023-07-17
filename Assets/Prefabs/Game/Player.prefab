@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 7892890302721301943}
   - component: {fileID: 7837445506958635434}
   - component: {fileID: -112028595828653420}
-  - component: {fileID: -6066582347385063090}
-  - component: {fileID: -6110503284221887532}
   - component: {fileID: 3088325907938376505}
   m_Layer: 0
   m_Name: Player
@@ -106,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   racerName: 
-  myCamera: {fileID: 0}
   cameraPrefab: {fileID: 254479975730601903, guid: e25125e85bde16945b3abb0332fefc45, type: 3}
 --- !u!58 &7892890302721301943
 CircleCollider2D:
@@ -208,42 +205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationState: 0
---- !u!114 &-6066582347385063090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918399889325235232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Library:
-  - m_Name: Ready
-    m_Hash: 0
-    m_CategoryList:
-    - m_Name: Ready Silent
-      m_Hash: 0
-      m_Sprite: {fileID: 1876549975169831848, guid: fa36cf72452fdea4ba09577fa0006617, type: 3}
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 869035056ab922f4d85936f109abfe53, type: 3}
---- !u!114 &-6110503284221887532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918399889325235232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CategoryHash: 2.4870795e-30
-  m_labelHash: 1.5530398e-37
-  m_SpriteKey: 0
-  m_SpriteHash: 969036164
 --- !u!95 &3088325907938376505
 Animator:
   serializedVersion: 5

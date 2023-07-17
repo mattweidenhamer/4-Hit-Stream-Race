@@ -30,5 +30,21 @@ public class RacerDropdownHandler : MonoBehaviour
             }
         }
     }
+
+    public void OnStartClicked(){
+        if (selectedRacers.Count > 0){
+            StartRace();
+        }
+        else {
+            //Indicate that there was a problem
+            print("There were no racers");
+        }
+    }
+    private void StartRace(){
+            print("Starting!");
+            GameObject.Find("Race Manager").GetComponent<RaceManager>().SpawnRaceFromSettings(selectedRacers);
+            GameObject.FindGameObjectWithTag("SpectatorManager").GetComponent<SpectatorManager>().generateSpectators();
+            Destroy(GameObject.FindGameObjectWithTag("UIRacerSelect"));
+    }
     
 }

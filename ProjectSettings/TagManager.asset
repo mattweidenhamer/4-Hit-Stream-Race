@@ -13,6 +13,7 @@ TagManager:
   - Camera
   - Camera Manager
   - UIRacerSelect
+  - SpectatorManager
   layers:
   - Default
   - TransparentFX
