@@ -4,14 +4,18 @@ using UnityEngine;
 using System.Text.Json;
 
 using NativeWebSocket;
+using System;
 
 public class WebsocketManager : MonoBehaviour
 {
     WebSocket webSocket;
     [SerializeField] int defaultPort = 1031;
-    int? gameID = null;
+    string gameID = "";
     bool waitingForGameID = false;
     [SerializeField] float secondsToWaitForGameID = 10f;
+    public void OpenDefaultWebsocket(bool overwrite = false){
+        OpenWebSocket(defaultPort, overwrite);
+    }
 
     public async void OpenWebSocket(int port, bool overwrite = false){
         if(webSocket != null && !overwrite){
@@ -32,18 +36,21 @@ public class WebsocketManager : MonoBehaviour
         webSocket.OnClose += (e) =>
         {
             Debug.Log("Connection closed!");
-            Reconnect();
+            //Reconnect();
         };
 
         webSocket.OnMessage += (bytes) =>
         {
-            // getting the message as a string
+            Debug.Log("Received message!");
             var message = System.Text.Encoding.UTF8.GetString(bytes);
+            // getting the message as a string
+            Debug.Log(message);
             ReceiveMessage(message);
         };
         await webSocket.Connect();
         
     }
+
     public async void SendWebSocketMessage(Dictionary<string, string> message){
         if(webSocket == null){
             Debug.LogError("Websocket was not created before message was sent! In the future, make sure it's created before sending a message.");
@@ -55,41 +62,52 @@ public class WebsocketManager : MonoBehaviour
     }
 
     public void SendNewGameMessage(){
-        Dictionary<string, string> message = new Dictionary<string, string>();
-        if (gameID != null){
-            Debug.LogWarning("Already have a game ID, sending overwrite!");
-            SendEndGame();
+        if (gameID != ""){
+            Debug.LogWarning("Already have a game ID, ending and overwriting!");
+            SendEndGameMessage();
         }
-        message.Add("type", "STARTGAME");
-        message.Add("gameID", "0");
+        Dictionary<string, string> message = new Dictionary<string, string>() {
+            { "type", "STARTGAME" },
+            { "gameID", "0" }
+        };
 
         SendWebSocketMessage(message);
         StartCoroutine(WaitForGameID());
     }
+    public void SendEndGameMessage(){
+        Dictionary<string, string> message = new Dictionary<string, string>() {
+            { "type", "ENDGAME" },
+            { "gameID", gameID.ToString() }
+
+        };
+        SendWebSocketMessage(message);
+        gameID = null;
+    }
+    public void SendRacerMessage(string discordID){
+        Dictionary<string, string> message = new Dictionary<string, string>() {
+            { "type", "RACER" },
+            { "gameID", gameID.ToString() },
+            { "discordID", discordID }
+        };
+        SendWebSocketMessage(message);
+    }
     private void ReceiveMessage(string message){
-        Debug.Log("Received message!");
         Dictionary<string, string> parsedMessage = JsonSerializer.Deserialize<Dictionary<string, string>>(message);
+    
         switch (parsedMessage["type"]) {
             case "SETUP":
                 checkSetupMessage(parsedMessage);
                 break;
+            // Update messages should be the ones that affect the racers.
             case "UPDATE":
                 checkUpdateMessage(parsedMessage);
                 break;
         }
+    }
 
-    }
-    private async void OnDestroy() {
-        await webSocket.Close();
-    }
-    public void SendEndGame(){
-        Dictionary<string, string> message = new Dictionary<string, string>();
-        message.Add("type", "ENDGAME");
-        message.Add("gameID", gameID.ToString());
-        SendWebSocketMessage(message);
-        gameID = null;
-    }
+
     IEnumerator WaitForGameID(){
+        Debug.Log("Waiting for game ID...");
         waitingForGameID = true;
         float timeWaited = 0f;
         while(gameID == null){
@@ -105,14 +123,13 @@ public class WebsocketManager : MonoBehaviour
         waitingForGameID = false;
         Debug.Log("Game ID received!");
     }
-    private void Reconnect(){
-        Debug.Log("Reconnecting...");
-        OpenWebSocket(defaultPort, true);
-    }
+
     private void checkSetupMessage(Dictionary<string, string> message){
         if(message["setup"] == "OK"){
             if(waitingForGameID){
-                gameID = int.Parse(message["gameID"]);
+                gameID = message["gameID"];
+                Debug.Log("Game ID received!");
+                Debug.Log("Game ID: " + gameID);
             }
         }
         else {
@@ -121,6 +138,22 @@ public class WebsocketManager : MonoBehaviour
 
     }
     private void checkUpdateMessage(Dictionary<string, string> message){
+        
+    }
+    private void Reconnect(){
+        Debug.Log("Reconnecting...");
+        OpenWebSocket(defaultPort, true);
+    }
+    void Update(){
+        if(webSocket == null){
+            return;
+        }
+        webSocket.DispatchMessageQueue();
+    }
+    private async void OnDestroy() {
+        if(webSocket != null){
+            await webSocket.Close();
+        }
         
     }
 }

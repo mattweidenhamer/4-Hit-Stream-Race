@@ -13,6 +13,6 @@ public class WebsocketTest : MonoBehaviour
         websocketManager.SendNewGameMessage();
     }
     public void TestSendEndGame(){
-        websocketManager.SendEndGame();
+        websocketManager.SendEndGameMessage();
     }
 }
